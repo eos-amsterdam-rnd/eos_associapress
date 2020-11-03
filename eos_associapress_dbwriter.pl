@@ -22,7 +22,7 @@ my $port = 8820;
 my $dsn = 'DBI:MariaDB:database=associapress;host=localhost';
 my $db_user = 'associapress';
 my $db_password = 'zu9ao2Ae';
-my $commit_every = 10;
+my $commit_every = 120;
 my $endblock = 2**32 - 1;
 
 my $network = 'eos';
@@ -222,6 +222,7 @@ sub process_atrace
                                             $tx->{'trx_id'},
                                             $data->{'user'},
                                             $data->{'data'});
+            printf STDERR ('.');
         }
     }
 }
