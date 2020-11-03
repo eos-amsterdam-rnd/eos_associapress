@@ -1,0 +1,20 @@
+[Unit]
+Description=eos_associapress_dbwriter
+After=mariadb.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/eos_associapress_dbwriter
+
+ExecStart=/usr/bin/perl /opt/eos_associapress/eos_associapress_dbwriter.pl $DBWRITE_OPTS
+TimeoutSec=45s
+Restart=always
+User=root
+Group=daemon
+KillMode=control-group
+
+
+[Install]
+WantedBy=multi-user.target
+
+
