@@ -17,9 +17,10 @@ for further processing. Here is an example using the command-line
 client:
 
 ```
-mysql --batch --host=associapress.eosamsterdam.eoswatch.info \
+mysql --batch --skip-column-names \
+ --host=associapress.eosamsterdam.eoswatch.info \
  --user=associapressro --password=associapressro --database=associapress \
- --execute="SELECT block_time, data FROM ELECTION"
+ --execute="SELECT block_num, block_time, trx_id, data FROM ELECTION ORDER BY seq DESC LIMIT 1"
 ```
 
 EOS Amsterdam is providing this data for the mere purpose of
