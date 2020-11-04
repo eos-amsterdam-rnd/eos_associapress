@@ -13,8 +13,37 @@ and block timestamp for every call, in order to provide an easy to
 verify dataset.
 
 Any MySQL-compatible database client can access and retrieve the data
-for further processing. Here is an example using the command-line
-client:
+for further processing.
+
+Database access information:
+
+```
+MySQL host: associapress.eosamsterdam.eoswatch.info
+database: associapress
+user: associapressro
+password: associapressro
+```
+
+The table ELECTION contains the "data" field value for every
+transaction. The field contains JSON-encoded voting results in each
+district. During an election, every new row is an update of the
+previous one, so it makes sense to query the latest row only.
+
+Table structure:
+
+```
+CREATE TABLE ELECTION
+(
+ seq         BIGINT UNSIGNED PRIMARY KEY,
+ block_num   BIGINT NOT NULL,
+ block_time  DATETIME NOT NULL,
+ trx_id      VARCHAR(64) NOT NULL,
+ user        VARCHAR(13) NOT NULL,
+ data        TEXT
+);
+```
+
+Here is an example using the command-line client:
 
 ```
 mysql --batch --skip-column-names \
